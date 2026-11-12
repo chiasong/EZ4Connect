@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
+
+if(APPLE AND NOT CMAKE_OSX_DEPLOYMENT_TARGET)
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "13.0" CACHE STRING "Minimum OS X deployment version" FORCE)
+endif()
+
 project(EZ4Connect)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -103,7 +108,10 @@ elseif(APPLE)
     )
 
     set_target_properties(${PROJECT_NAME}
-        PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/resource/Info.plist")
+        PROPERTIES
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/resource/Info.plist"
+        XCODE_ATTRIBUTE_MACOSX_DEPLOYMENT_TARGET "13.0"
+    )
 else()
     add_executable(${PROJECT_NAME}
         ${SOURCE_FILES}

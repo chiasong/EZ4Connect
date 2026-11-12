@@ -176,10 +176,10 @@ jobs:
         run: |
           mkdir build
           if ${{ env.NIGHTLY_BUILD }} ; then
-            cmake -DNIGHTLY_BUILD=ON -DQT_DEBUG_FIND_PACKAGE=ON -DGIT_HASH=$(git rev-parse --short=7 HEAD) -DCMAKE_OSX_ARCHITECTURES="x86_64" -S . -B build
+            cmake -DNIGHTLY_BUILD=ON -DQT_DEBUG_FIND_PACKAGE=ON -DGIT_HASH=$(git rev-parse --short=7 HEAD) -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET="13.0" -S . -B build
           else
             VER=${{ env.RELEASE_VERSION }}
-            cmake -DNIGHTLY_BUILD=OFF -DREL_VER=${VER#v} -DCMAKE_OSX_ARCHITECTURES="x86_64" -S . -B build
+            cmake -DNIGHTLY_BUILD=OFF -DREL_VER=${VER#v} -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET="13.0" -S . -B build
           fi
 
       - name: Build
@@ -281,10 +281,10 @@ jobs:
         run: |
           mkdir build
           if ${{ env.NIGHTLY_BUILD }} ; then
-            cmake -DNIGHTLY_BUILD=ON -DQT_DEBUG_FIND_PACKAGE=ON -DGIT_HASH=$(git rev-parse --short=7 HEAD) -DCMAKE_OSX_ARCHITECTURES="arm64" -S . -B build
+            cmake -DNIGHTLY_BUILD=ON -DQT_DEBUG_FIND_PACKAGE=ON -DGIT_HASH=$(git rev-parse --short=7 HEAD) -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET="13.0" -S . -B build
           else
             VER=${{ env.RELEASE_VERSION }}
-            cmake -DNIGHTLY_BUILD=OFF -DREL_VER=${VER#v} -DCMAKE_OSX_ARCHITECTURES="arm64" -S . -B build
+            cmake -DNIGHTLY_BUILD=OFF -DREL_VER=${VER#v} -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET="13.0" -S . -B build
           fi
 
       - name: Build
